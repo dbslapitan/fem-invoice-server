@@ -1,9 +1,13 @@
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 
 const dotenvConfig = dotenv.config();
 
-import * as express from 'express';
+import { normalizePort } from "./utils";
+import { logger } from "./config/logger";
 
-const app = express();
+const app = require("./config/app");
 
-app.listen(9000);
+const port = normalizePort(process.env.PORT || 3000);
+app.listen(port, () => {
+    logger.info(`Server started at PORT ${port}`)
+});
