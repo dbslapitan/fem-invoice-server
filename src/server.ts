@@ -7,6 +7,7 @@ if(dotenvConfig.error){
     process.exit(1);
 }
 
+import "reflect-metadata"
 import { normalizePort } from "./utils";
 import { logger } from "./config/logger";
 import { app } from "./config/app";
