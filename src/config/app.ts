@@ -1,9 +1,11 @@
-import * as express from 'express';
-
-const app = express();
+import * as express from "express";
+import * as cors from "cors";
+import * as bodyParser from "body-parser";
 
 const invoicesRouter = require('../routes/invoices-routes');
 
-app.use('/api/v1/invoices', invoicesRouter);
+export const app = express();
 
-module.exports = app;
+app.use(cors());
+app.use(bodyParser.json());
+app.use('/api/v1/invoices', invoicesRouter);
