@@ -2,6 +2,8 @@ import * as express from 'express';
 
 const app = express();
 
-app.get('/', (req, res, next) => { res.json({"message": "Successful"}) })
+const invoicesRouter = require('../routes/invoices-routes');
+
+app.use('/api/v1/invoices', invoicesRouter);
 
 module.exports = app;
