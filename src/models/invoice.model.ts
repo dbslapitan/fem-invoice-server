@@ -1,21 +1,21 @@
 import {Address} from "./address.model";
 import {Item} from "./item.model";
-import {Column, CreateDateColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
-import {JoinColumn} from "typeorm/browser";
+import {Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 
+@Entity()
 export class Invoice{
 
     @PrimaryGeneratedColumn()
-    psqlId: number;
+    id: number;
 
     @Column()
-    id: string;
+    stringId: string;
 
     @CreateDateColumn()
     createdAt: Date;
 
     @Column()
-    paymentDue: Date;
+    paymentDue: string;
 
     @Column()
     description: string;
@@ -33,11 +33,11 @@ export class Invoice{
     status: string;
 
     @OneToOne(() => Address)
-    @JoinColumn()
+    @JoinColumn({name: "senderAddressId"})
     senderAddress: Address;
 
     @OneToOne(() => Address)
-    @JoinColumn()
+    @JoinColumn({name: "clientAddressId"})
     clientAddress: Address;
 
     @OneToMany(() => Item, (item) => item.invoice)
