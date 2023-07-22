@@ -23,11 +23,14 @@ async function populateDb(){
     for(let invoice of invoices){
         const {senderAddress, clientAddress, items, id, ...remaining} = invoice;
         const stringId = id;
+        const client = "clientAddress";
+        const sender = "senderAddress";
+
         const newInvoiceRepository = invoiceRepository.create({...remaining, stringId});
         const saveInvoice = invoiceRepository.save(newInvoiceRepository);
 
-        const newSenderRepository = addressRepository.create(senderAddress);
-        const newClientRepository = addressRepository.create(clientAddress);
+        const newSenderRepository = addressRepository.create({...senderAddress, attachedTo: sender});
+        const newClientRepository = addressRepository.create({...clientAddress, attachedTo: client});
         const saveClient = addressRepository.save(newClientRepository);
         const saveSender = addressRepository.save(newSenderRepository);
         await Promise.all([saveInvoice, saveClient, saveSender]);
@@ -39,4 +42,10 @@ async function populateDb(){
     }
 }
 
-populateDb().then(() => console.log('Finished populating database...')).catch(error => console.log(error));
+populateDb().then(() => {
+    console.log('Finished populating database...');
+    process.exit(0);
+}).catch(error => {
+    console.log(error);
+    process.exit(1);
+});

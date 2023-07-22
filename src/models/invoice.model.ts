@@ -15,7 +15,7 @@ export class Invoice{
     createdAt: Date;
 
     @Column()
-    paymentDue: string;
+    paymentDue: Date;
 
     @Column()
     description: string;
@@ -33,13 +33,16 @@ export class Invoice{
     status: string;
 
     @OneToOne(() => Address)
-    @JoinColumn({name: "senderAddressId"})
+    @JoinColumn({name: "InvoiceId"})
     senderAddress: Address;
 
     @OneToOne(() => Address)
-    @JoinColumn({name: "clientAddressId"})
+    @JoinColumn({name: "invoiceId"})
     clientAddress: Address;
 
     @OneToMany(() => Item, (item) => item.invoice)
     items: Item[];
+
+    @Column({type: "numeric"})
+    total: number;
 }

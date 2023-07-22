@@ -17,4 +17,7 @@ export class Address{
 
     @Column()
     country: string;
+
+    @Column()
+    attachedTo: string;
 }
