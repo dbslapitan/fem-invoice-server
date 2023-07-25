@@ -6,7 +6,7 @@ import {Item} from "../models/item.model";
 
 export async function getInvoices(req, res, next) {
     try {
-        const invoices = await postgresDataSource.getRepository(Item)
+        const invoices = await postgresDataSource.getRepository(Invoice)
             .createQueryBuilder("invoices").getMany();
 
         res.status(200).json(invoices);
