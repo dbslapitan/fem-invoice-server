@@ -15,31 +15,51 @@ async function populateDb(){
     console.log('Datasource Initialized...');
 
     const invoices = INVOICES;
+
     const invoiceRepository = postgresDataSource.getRepository(Invoice);
     const addressRepository = postgresDataSource.getRepository(Address);
     const itemRepository = postgresDataSource.getRepository(Item);
 
     for(let invoice of invoices){
-        const {senderAddress, clientAddress, items, id, ...remaining} = invoice;
+        const {senderAddress,
+            clientAddress,
+            items,
+            id,
+            ...remaining
+            } = invoice;
         const stringId = id;
         const client = "clientAddress";
         const sender = "senderAddress";
 
-        const newInvoice: {} = {...remaining};
-        newInvoice["stringId"] = stringId;
-        console.log()
+        const invoiceString = JSON.stringify(remaining);
+        const newInvoice = JSON.parse(invoiceString) as Partial<Invoice>;
+        newInvoice.stringId = stringId;
 
-        const newInvoiceRepository = invoiceRepository.create({...remaining, stringId});
-        const saveInvoice = invoiceRepository.save(newInvoiceRepository);
+        const senderAddressString = JSON.stringify(senderAddress);
+        const newSenderAddress = JSON.parse(senderAddressString) as Partial<Address>;
+        newSenderAddress.attachedTo = sender;
 
-        const newSenderRepository = addressRepository.create({...senderAddress, attachedTo: sender});
-        const newClientRepository = addressRepository.create({...clientAddress, attachedTo: client});
-        const saveClient = addressRepository.save(newClientRepository);
-        const saveSender = addressRepository.save(newSenderRepository);
-        await Promise.all([saveInvoice, saveClient, saveSender]);
+        const clientAddressString = JSON.stringify(clientAddress);
+        const newClientAddress = JSON.parse(clientAddressString) as Partial<Address>;
+        newClientAddress.attachedTo = client;
+
+        console.log(newSenderAddress, newClientAddress);
+
+        const newInvoiceRepository = invoiceRepository.create(newInvoice as Invoice);
+        await invoiceRepository.save(newInvoiceRepository);
+
+        newSenderAddress.invoice = newInvoiceRepository;
+        newClientAddress.invoice = newInvoiceRepository;
+
+        const newSenderRepository = addressRepository.create(newSenderAddress as Address);
+        await addressRepository.save(newSenderRepository);
+        const newClientRepository = addressRepository.create(newClientAddress as Address);
+        await addressRepository.save(newClientRepository);
 
         for(let item of invoice.items){
-            const newItemRepository = itemRepository.create(item);
+            const newItem = item as Partial<Item>;
+            newItem.invoice = newInvoiceRepository;
+            const newItemRepository = itemRepository.create(newItem);
             await itemRepository.save(newItemRepository);
         }
     }
