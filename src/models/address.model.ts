@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Invoice} from "./invoice.model";
 
 @Entity()
 export class Address{
@@ -20,4 +21,7 @@ export class Address{
 
     @Column()
     attachedTo: string;
+
+    @ManyToOne(() => Invoice, (invoice) => invoice.items)
+    invoice: Invoice
 }

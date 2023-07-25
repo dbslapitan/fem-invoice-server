@@ -32,13 +32,8 @@ export class Invoice{
     @Column()
     status: string;
 
-    @OneToOne(() => Address)
-    @JoinColumn({name: "InvoiceId"})
-    senderAddress: Address;
-
-    @OneToOne(() => Address)
-    @JoinColumn({name: "invoiceId"})
-    clientAddress: Address;
+    @OneToMany(() => Address, (address) => address.invoice)
+    addresses: Address[]
 
     @OneToMany(() => Item, (item) => item.invoice)
     items: Item[];

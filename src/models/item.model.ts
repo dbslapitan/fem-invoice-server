@@ -20,6 +20,5 @@ export class Item{
     total: number;
 
     @ManyToOne(() => Invoice, (invoice) => invoice.items)
-    @JoinColumn({name: 'invoiceId'})
     invoice: Invoice;
 }

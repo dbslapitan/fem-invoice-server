@@ -14,8 +14,7 @@ async function populateDb(){
     await postgresDataSource.initialize();
     console.log('Datasource Initialized...');
 
-    const invoices = Object.values(INVOICES);
-
+    const invoices = INVOICES;
     const invoiceRepository = postgresDataSource.getRepository(Invoice);
     const addressRepository = postgresDataSource.getRepository(Address);
     const itemRepository = postgresDataSource.getRepository(Item);
@@ -25,6 +24,10 @@ async function populateDb(){
         const stringId = id;
         const client = "clientAddress";
         const sender = "senderAddress";
+
+        const newInvoice: {} = {...remaining};
+        newInvoice["stringId"] = stringId;
+        console.log()
 
         const newInvoiceRepository = invoiceRepository.create({...remaining, stringId});
         const saveInvoice = invoiceRepository.save(newInvoiceRepository);
