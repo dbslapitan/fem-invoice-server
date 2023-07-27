@@ -310,3 +310,77 @@
 {"level":"info","message":"Database successfully initialized..."}
 {"level":"info","message":"Server started at PORT 9000"}
 {"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of undefined"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of undefined"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of null"}
+{"level":"info","message":"Getting full invoice of RT3080"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of RT3080"}
+{"level":"info","message":"Getting full invoice of RT3080"}
+{"level":"info","message":"Getting full invoice of RT3080"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of RT3080"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of RT3080"}
+{"level":"error","message":"Error while getting invoice RT3080... Property \"stringId\" was not found in \"Item\". Make sure your query is correct.","stack":"EntityPropertyNotFoundError: Property \"stringId\" was not found in \"Item\". Make sure your query is correct.\n    at SelectQueryBuilder.buildWhere (D:\\Frontend Mentor\\fem-invoice\\server\\node_modules\\typeorm\\query-builder\\SelectQueryBuilder.js:2466:27)\n    at SelectQueryBuilder.applyFindOptions (D:\\Frontend Mentor\\fem-invoice\\server\\node_modules\\typeorm\\query-builder\\SelectQueryBuilder.js:1773:40)\n    at SelectQueryBuilder.setFindOptions (D:\\Frontend Mentor\\fem-invoice\\server\\node_modules\\typeorm\\query-builder\\SelectQueryBuilder.js:71:14)\n    at EntityManager.findBy (D:\\Frontend Mentor\\fem-invoice\\server\\node_modules\\typeorm\\entity-manager\\EntityManager.js:531:14)\n    at Repository.findBy (D:\\Frontend Mentor\\fem-invoice\\server\\node_modules\\typeorm\\repository\\Repository.js:203:29)\n    at getFullInvoice (D:\\Frontend Mentor\\fem-invoice\\server\\dist\\controllers\\invoices-controller.js:29:95)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"error"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of RT3080"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of RT3080"}

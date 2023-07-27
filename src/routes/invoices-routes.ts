@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.route('/').get(invoicesController.getInvoices);
 
+router.route('/:stringId').get(invoicesController.getFullInvoice);
+
 module.exports = router;
