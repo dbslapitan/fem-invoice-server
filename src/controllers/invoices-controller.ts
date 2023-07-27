@@ -29,7 +29,11 @@ export async function getFullInvoice(req, res, next){
         const items = await postgresDataSource.getRepository(Item).findBy({invoice});
         const addresses = await postgresDataSource.getRepository(Address).findBy({invoice});
 
-        res.status(200).json({invoice, items, addresses });
+        const newInvoice = {...invoice};
+        newInvoice["clientAddress"] = addresses.find(address => address.attachedTo === "client");
+        newInvoice["senderAddress"] = addresses.find(address => address.attachedTo === "sender");
+
+        res.status(200).json({newInvoice, items});
     }catch (error){
         const stringId = req.params.stringId;
         logger.error(`Error while getting invoice ${stringId}...`, error)
