@@ -32,7 +32,6 @@ export async function getFullInvoice(req, res, next){
         const newInvoice: any = {...invoice};
         newInvoice["clientAddress"] = addresses.find(address => address.attachedTo === "clientAddress");
         newInvoice["senderAddress"] = addresses.find(address => address.attachedTo === "senderAddress");
-
         res.status(200).json({newInvoice, items});
     }catch (error){
         const stringId = req.params.stringId;
