@@ -38,6 +38,6 @@ export class Invoice{
     @OneToMany(() => Item, (item) => item.invoice)
     items: Item[];
 
-    @Column({type: "numeric"})
+    @Column({type: "decimal"})
     total: number;
 }
