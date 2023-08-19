@@ -8,7 +8,6 @@ export async function getInvoices(req, res, next) {
     try {
         const invoices = await postgresDataSource.getRepository(Invoice)
             .createQueryBuilder("invoices").orderBy("invoices.createdAt").getMany();
-
         res.status(200).json(invoices);
     }catch (error){
         logger.error("Error while getting Invoices...", error)
@@ -27,6 +26,7 @@ export async function getFullInvoice(req, res, next){
 
         const invoice = await postgresDataSource.getRepository(Invoice).findOneBy({stringId});
         const items = await postgresDataSource.getRepository(Item).findBy({invoice});
+        console.log(items);
         const addresses = await postgresDataSource.getRepository(Address).findBy({invoice});
 
         const newInvoice: any = {...invoice};
@@ -34,6 +34,51 @@ export async function getFullInvoice(req, res, next){
         newInvoice["senderAddress"] = addresses.find(address => address.attachedTo === "senderAddress");
         res.status(200).json({newInvoice, items});
     }catch (error){
+        const stringId = req.params.stringId;
+        logger.error(`Error while getting invoice ${stringId}...`, error)
+        next(error);
+    }
+}
+
+export async function putFullInvoice(req, res, next) {
+    try {
+        const stringId = req.params.stringId;
+        const {invoice, items, addresses} = req.body;
+        console.log(req.body);
+
+        const invoiceRepository = postgresDataSource.getRepository(Invoice);
+        const itemRepository = postgresDataSource.getRepository(Item);
+        const addressRepository = postgresDataSource.getRepository(Address);
+
+        await postgresDataSource
+            .getRepository(Invoice)
+            .createQueryBuilder()
+            .update(Invoice)
+            .set(invoice)
+            .where("stringId = :stringId", {stringId})
+            .execute();
+
+
+        /*
+        for(let item of items){
+            if(!item.id){
+                const {id, ...newItem} = item;
+                newItem.invoice = invoiceRepository;
+            }
+            await postgresDataSource
+                .getRepository(Item)
+                .createQueryBuilder()
+                .update(Item)
+                .set(item)
+                .where("id = :id", {id: item.id})
+                .execute();
+        }*/
+
+        return res.status(200).json({
+            success: true,
+            message: `Invoice ${stringId} successfully updated.`
+        });
+    } catch (error) {
         const stringId = req.params.stringId;
         logger.error(`Error while getting invoice ${stringId}...`, error)
         next(error);
