@@ -26,7 +26,6 @@ export async function getFullInvoice(req, res, next){
 
         const invoice = await postgresDataSource.getRepository(Invoice).findOneBy({stringId});
         const items = await postgresDataSource.getRepository(Item).findBy({invoice});
-        console.log(items);
         const addresses = await postgresDataSource.getRepository(Address).findBy({invoice});
 
         const newInvoice: any = {...invoice};
@@ -44,10 +43,7 @@ export async function putFullInvoice(req, res, next) {
     try {
         const stringId = req.params.stringId;
         const {invoice, items, addresses} = req.body;
-        console.log(req.body);
 
-        const invoiceRepository = postgresDataSource.getRepository(Invoice);
-        const itemRepository = postgresDataSource.getRepository(Item);
         const addressRepository = postgresDataSource.getRepository(Address);
 
         await postgresDataSource
@@ -58,6 +54,21 @@ export async function putFullInvoice(req, res, next) {
             .where("stringId = :stringId", {stringId})
             .execute();
 
+        const invoiceRepository = await postgresDataSource
+            .getRepository(Invoice)
+            .findOneBy({stringId});
+
+        for(let item of items){
+            if(!item.id){
+                const {id, ...restOfItem} = item;
+                const newItem = {...restOfItem} as Partial<Item>;
+                newItem.invoice = invoiceRepository;
+                const itemRepository = postgresDataSource
+                    .getRepository(Item);
+                const newItemRepo = itemRepository.create(newItem);
+                await itemRepository.save(newItemRepo);
+            }
+        }
 
         /*
         for(let item of items){
@@ -76,7 +87,7 @@ export async function putFullInvoice(req, res, next) {
 
         return res.status(200).json({
             success: true,
-            message: `Invoice ${stringId} successfully updated.`
+            message: `Invoice ${stringId} successfully updated`
         });
     } catch (error) {
         const stringId = req.params.stringId;
