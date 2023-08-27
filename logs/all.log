@@ -2436,3 +2436,69 @@
 {"level":"info","message":"Database successfully initialized..."}
 {"level":"info","message":"Server started at PORT 9000"}
 {"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Getting full invoice of FV2353"}
+{"level":"info","message":"Getting full invoice of FV2353"}
+{"level":"info","message":"Getting full invoice of FV2353"}
+{"level":"info","message":"Getting full invoice of FV2353"}
+{"level":"info","message":"Getting full invoice of FV2353"}
+{"level":"info","message":"Getting full invoice of FV2353"}
+{"level":"info","message":"Getting full invoice of FV2353"}
+{"level":"info","message":"Getting full invoice of RT2080"}
+{"level":"info","message":"Getting full invoice of RT2080"}
+{"level":"info","message":"Getting full invoice of RT2080"}
+{"level":"info","message":"Getting full invoice of RT2080"}
+{"level":"info","message":"Getting full invoice of RT2080"}
+{"level":"info","message":"Getting full invoice of RT2080"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of RT2080"}
+{"level":"error","message":"Error while getting invoice RT2080... You must provide selection conditions in order to find a single row.","stack":"Error: You must provide selection conditions in order to find a single row.\n    at EntityManager.findOne (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\typeorm\\entity-manager\\EntityManager.js:588:19)\n    at Repository.findOne (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\typeorm\\repository\\Repository.js:239:29)\n    at getFullInvoice (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\dist\\controllers\\invoices-controller.js:30:14)\n    at Layer.handle [as handle_request] (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at Route.dispatch (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\express\\lib\\router\\route.js:114:3)\n    at Layer.handle [as handle_request] (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\express\\lib\\router\\index.js:284:15\n    at param (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\express\\lib\\router\\index.js:365:14)\n    at param (C:\\Users\\dbsla\\Documents\\Frontend Mentor\\Solutions\\invoices\\server\\node_modules\\express\\lib\\router\\index.js:376:14)"}
+{"level":"error"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of XM9141"}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Server started at PORT 9000"}
+{"level":"info","message":"Database successfully initialized..."}
+{"level":"info","message":"Getting full invoice of XM9141"}

@@ -9,4 +9,6 @@ router.route('/:stringId').get(invoicesController.getFullInvoice);
 
 router.route('/:stringId').put(invoicesController.putFullInvoice);
 
+router.route('/mark-as-paid/:stringId').put(invoicesController.markInvoiceAsPaid);
+
 module.exports = router;

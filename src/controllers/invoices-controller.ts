@@ -25,6 +25,18 @@ export async function getFullInvoice(req, res, next){
             throw "Could not extract the stringId from the request parameters..."
         }
 
+        const withRelations = await postgresDataSource
+            .getRepository(Invoice)
+            .findOne({
+                relations: {
+                    addresses: true,
+                    items: true
+                },
+                where: {
+                    stringId
+                }
+            });
+
         const invoice = await postgresDataSource.getRepository(Invoice).findOneBy({stringId});
         const items = await postgresDataSource.getRepository(Item).findBy({invoice});
         const addresses = await postgresDataSource.getRepository(Address).findBy({invoice});
@@ -112,5 +124,39 @@ export async function putFullInvoice(req, res, next) {
         const stringId = req.params.stringId;
         logger.error(`Error while getting invoice ${stringId}...`, error)
         next(error);
+    }
+}
+
+export async function markInvoiceAsPaid(req, res, next){
+    try {
+        const stringId = req.params.stringId;
+        if(!stringId){
+            throw "Could not extract the stringId from the request parameters..."
+        }
+        const updatedInvoice = await postgresDataSource
+            .getRepository(Invoice)
+            .createQueryBuilder()
+            .update(Invoice)
+            .set({status: "paid"})
+            .where("stringId = :stringId", {stringId})
+            .andWhere("status = 'pending'")
+            .execute();
+
+        if(updatedInvoice.affected === 0){
+            res.status(400).json({
+               success: false,
+               message: `Invoice #${stringId} is already \"paid\" or is still a \"draft\"...`
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: `Status from Invoice ${stringId} has changed from "pending" to "paid"...`
+        });
+    }
+    catch(error){
+        res.status(500).json({
+            success: false,
+            message: error
+        });
     }
 }
