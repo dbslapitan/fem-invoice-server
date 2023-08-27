@@ -3,6 +3,7 @@ import {Invoice} from "../models/invoice.model";
 import {logger} from "../config/logger";
 import {Address} from "../models/address.model";
 import {Item} from "../models/item.model";
+import {add} from "winston";
 
 export async function getInvoices(req, res, next) {
     try {
@@ -46,8 +47,6 @@ export async function putFullInvoice(req, res, next) {
         const {invoice, items, addresses} = req.body;
         const idList: number[] = [];
 
-        const addressRepository = postgresDataSource.getRepository(Address);
-
         await postgresDataSource
             .getRepository(Invoice)
             .createQueryBuilder()
@@ -90,6 +89,19 @@ export async function putFullInvoice(req, res, next) {
                     .where('item.id = :id', {id})
                     .execute();
             }
+        }
+
+        console.log(addresses);
+
+        for(let address of addresses){
+            const id = address.id;
+            await postgresDataSource
+                .getRepository(Address)
+                .createQueryBuilder()
+                .update(Address)
+                .set(address)
+                .where("id = :id", {id})
+                .execute();
         }
 
         return res.status(200).json({
