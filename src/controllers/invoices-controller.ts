@@ -43,6 +43,7 @@ export async function putFullInvoice(req, res, next) {
     try {
         const stringId = req.params.stringId;
         const {invoice, items, addresses} = req.body;
+        const idList: number[] = [];
 
         const addressRepository = postgresDataSource.getRepository(Address);
 
@@ -66,10 +67,29 @@ export async function putFullInvoice(req, res, next) {
                 const itemRepository = postgresDataSource
                     .getRepository(Item);
                 const newItemRepo = itemRepository.create(newItem);
-                await itemRepository.save(newItemRepo);
+                const savedItem = await itemRepository.save(newItemRepo);
+                idList.push(savedItem.id);
+            } else{
+                idList.push(item.id);
             }
         }
 
+        const itemRepository = await postgresDataSource
+            .getRepository(Item)
+            .findBy({invoice: invoiceRepository});
+
+        for(let item of itemRepository){
+            if(!idList.includes(item.id)){
+                const id = item.id;
+                await postgresDataSource
+                    .getRepository(Item)
+                    .createQueryBuilder()
+                    .delete()
+                    .from('item')
+                    .where('item.id = :id', {id})
+                    .execute();
+            }
+        }
         /*
         for(let item of items){
             if(!item.id){
