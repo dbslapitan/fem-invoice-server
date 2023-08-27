@@ -57,6 +57,7 @@ export async function putFullInvoice(req, res, next) {
     try {
         const stringId = req.params.stringId;
         const {invoice, items, addresses} = req.body;
+        invoice.status = "pending";
         const idList: number[] = [];
 
         await postgresDataSource
