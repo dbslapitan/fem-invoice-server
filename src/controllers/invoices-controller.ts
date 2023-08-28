@@ -104,8 +104,6 @@ export async function putFullInvoice(req, res, next) {
             }
         }
 
-        console.log(addresses);
-
         for(let address of addresses){
             const id = address.id;
             await postgresDataSource
@@ -159,5 +157,61 @@ export async function markInvoiceAsPaid(req, res, next){
             success: false,
             message: error
         });
+    }
+
+}
+
+
+export async function deleteInvoice(req, res, next){
+    try {
+        const stringId = req.params.stringId;
+        if (!stringId) {
+            throw "Could not extract the stringId from the request parameters..."
+        }
+
+        const invoice = await postgresDataSource
+            .getRepository(Invoice)
+            .findOne({
+                where: {stringId},
+                relations: {
+                    addresses: true,
+                    items: true
+                }
+            });
+
+        for(let item of invoice.items){
+            const id = item.id;
+            await postgresDataSource
+                .getRepository(Item)
+                .createQueryBuilder()
+                .delete()
+                .from("item")
+                .where("id = :id", {id})
+                .execute();
+        }
+
+        for(let address of invoice.addresses){
+            const id = address.id;
+            await postgresDataSource
+                .getRepository(Address)
+                .createQueryBuilder()
+                .delete()
+                .from("address")
+                .where("id = :id", {id})
+                .execute();
+        }
+
+        await postgresDataSource
+            .getRepository(Invoice)
+            .createQueryBuilder()
+            .delete()
+            .from("invoice")
+            .where("stringId = :stringId", {stringId})
+            .execute();
+
+        res.status(200).json({message: "success"});
+    }
+    catch (error){
+        res.status(200).json({message: error});
     }
 }
