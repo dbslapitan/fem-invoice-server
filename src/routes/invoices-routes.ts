@@ -13,4 +13,6 @@ router.route('/mark-as-paid/:stringId').put(invoicesController.markInvoiceAsPaid
 
 router.route('/delete/:stringId').delete(invoicesController.deleteInvoice);
 
+router.route('/save-as-draft').post(invoicesController.saveAsDraft);
+
 module.exports = router;

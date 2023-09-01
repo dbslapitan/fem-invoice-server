@@ -215,3 +215,35 @@ export async function deleteInvoice(req, res, next){
         res.status(200).json({message: error});
     }
 }
+
+export async function saveAsDraft(req, res, next){
+    try{
+        const {invoice, addresses, items} = req.body;
+        let isUnique = false;
+        let result = '';
+        while (!isUnique){
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+            result += Math.floor(Math.random() * 9999);
+
+            const invoiceDB = await postgresDataSource.getRepository(Invoice)
+                .createQueryBuilder("invoice")
+                .where("invoice.stringId = :result", {result})
+                .getOne();
+
+            isUnique = invoiceDB === null;
+        }
+        invoice.addresses = addresses;
+        invoice.items = items;
+
+
+    }
+    catch(error){
+
+    }
+    res.status(200).json({
+        success: true,
+        message: `Invoice Created...`
+    })
+}
