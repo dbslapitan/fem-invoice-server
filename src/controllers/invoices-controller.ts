@@ -240,10 +240,34 @@ export async function saveAsDraft(req, res, next){
 
         let invoiceTotal = 0;
 
-        const invoices = postgresDataSource.getRepository(Invoice).create(invoice);
-        const newInvoice = await postgresDataSource.getRepository(Invoice).save(invoices);
+        const invoiceRepo = postgresDataSource.getRepository(Invoice).create(invoice as Invoice);
+        const newInvoice = await postgresDataSource.getRepository(Invoice).save(invoiceRepo);
 
-        console.log(newInvoice)
+        for(let address of addresses){
+            const addressRepo = postgresDataSource.getRepository(Address);
+            const newAddress = {...address} as Partial<Address>;
+            newAddress.invoice = invoiceRepo;
+            const newAddressRepo = addressRepo.create(newAddress);
+            await postgresDataSource.getRepository(Address).save(newAddressRepo);
+        }
+
+        for(let item of items){
+            const itemRepo = postgresDataSource.getRepository(Item);
+            const newItem = {...item} as Partial<Item>;
+            newItem.invoice = invoiceRepo;
+            const newItemRepo = itemRepo.create(newItem);
+            await postgresDataSource.getRepository(Item).save(newItemRepo);
+        }
+
+        const value = await postgresDataSource.getRepository(Invoice).findOne({
+            where: {stringId: newInvoice.stringId},
+            relations: {
+                addresses: true,
+                items: true
+            }
+        });
+
+        console.log(value);
         res.status(200).json({
             success: true,
             message: `Invoice Created...`
@@ -251,5 +275,9 @@ export async function saveAsDraft(req, res, next){
     }
     catch(error){
 
+        res.status(500).json({
+            success: false,
+            message: `Error`
+        })
     }
 }
