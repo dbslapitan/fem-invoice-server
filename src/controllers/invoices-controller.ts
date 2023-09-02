@@ -8,7 +8,7 @@ import {add} from "winston";
 export async function getInvoices(req, res, next) {
     try {
         const invoices = await postgresDataSource.getRepository(Invoice)
-            .createQueryBuilder("invoices").orderBy("invoices.createdAt").getMany();
+            .createQueryBuilder("invoices").orderBy("invoices.id").getMany();
         res.status(200).json(invoices);
     }catch (error){
         logger.error("Error while getting Invoices...", error)
@@ -234,16 +234,22 @@ export async function saveAsDraft(req, res, next){
 
             isUnique = invoiceDB === null;
         }
-        invoice.addresses = addresses;
-        invoice.items = items;
+        invoice.stringId = result;
+        invoice.status = "draft";
+        invoice.total = 0;
 
+        let invoiceTotal = 0;
 
+        const invoices = postgresDataSource.getRepository(Invoice).create(invoice);
+        const newInvoice = await postgresDataSource.getRepository(Invoice).save(invoices);
+
+        console.log(newInvoice)
+        res.status(200).json({
+            success: true,
+            message: `Invoice Created...`
+        })
     }
     catch(error){
 
     }
-    res.status(200).json({
-        success: true,
-        message: `Invoice Created...`
-    })
 }
